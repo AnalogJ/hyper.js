@@ -8,7 +8,7 @@ var r7kamuraSign = require('./r7kamura-signer');
 var request_options = {
     //body: '',
     headers: {
-        "X-Hyper-Date": new Date().toISOString(),
+        // "X-Hyper-Date": new Date().toISOString(),
         Host: 'us-west-1.hyper.sh:443',
         "Content-Type": "application/json"
 
