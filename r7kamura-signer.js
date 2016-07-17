@@ -1,3 +1,4 @@
+// from https://raw.githubusercontent.com/r7kamura/aws-signer-v4/master/index.js
 var crypto = require('crypto');
 var url = require('url');
 // var moment = require('moment');
