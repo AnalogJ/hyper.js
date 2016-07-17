@@ -1,7 +1,7 @@
 // from https://raw.githubusercontent.com/r7kamura/aws-signer-v4/master/index.js
 var crypto = require('crypto');
 var url = require('url');
-// var moment = require('moment');
+
 /**
  * @class
  * @property {string} accessKeyId
@@ -23,7 +23,7 @@ var Sign = function (configuration) {
     this.url = configuration.url;
 
     this.headers['X-Hyper-Content-Sha256'] = this._hexdigest(this.body || '');
-
+    this._setCleanedDateHeader()
 };
 
 /**
@@ -98,17 +98,17 @@ Sign.prototype._getCredentialString = function () {
     ].join('/');
 };
 
-/**
- * @return {Date}
- */
-Sign.prototype._getDate = function () {
-    return this._getDateHeader();
-    // if (dateHeader) {
-    //     return new Date(dateHeader);
-    // } else {
-    //     return new Date();
-    // }
-};
+Sign.prototype._setCleanedDateHeader = function () {
+    var dateHeader = this._getDateHeader();
+    var date = null;
+    if (dateHeader) {
+        date = new Date(dateHeader);
+    } else {
+        date = new Date();
+    }
+
+    this.headers['X-Hyper-Date'] = date.toISOString().replace(/[:\-]|\.\d{3}/g, '')
+}
 
 /**
  * @return {string, undefined}
@@ -122,7 +122,7 @@ Sign.prototype._getDateHeader = function () {
  * @return {string}
  */
 Sign.prototype._getDateInString = function () {
-    return this._getDate();
+    return this._getDateHeader();
 };
 
 /**
@@ -136,7 +136,7 @@ Sign.prototype._getDateInShortString = function () {
  * @return {string}
  */
 Sign.prototype._getPath = function () {
-    return url.parse(this.url).pathname;
+    return url.parse(this.url).pathname.substring(1) //Hyper ignores the '/' prefix
 };
 
 /**

@@ -1,0 +1,26 @@
+{
+  "name": "hyper.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "poc.js",
+  "dependencies": {
+    "crypto-js": "^3.1.6",
+    "lodash": "^4.13.1",
+    "moment": "^2.14.1",
+    "request": "^2.73.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnalogJ/hyper.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnalogJ/hyper.js/issues"
+  },
+  "homepage": "https://github.com/AnalogJ/hyper.js#readme"
+}
