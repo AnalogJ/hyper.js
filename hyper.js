@@ -1,6 +1,6 @@
 var Docker = require('dockerode'),
     Modem = require('docker-modem'),
-    Signer = require('./r7kamura-signer'),
+    Signer = require('./signer'),
     util = require('util'),
     url = require('url');
 
