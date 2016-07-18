@@ -1,4 +1,4 @@
-// from https://raw.githubusercontent.com/r7kamura/aws-signer-v4/master/index.js
+// from https://www.github.com/r7kamura/aws-signer-v4
 var crypto = require('crypto');
 var url = require('url');
 
