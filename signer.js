@@ -24,6 +24,14 @@ var Sign = function (configuration) {
 
     this.headers['X-Hyper-Content-Sha256'] = this._hexdigest(this.body || '');
     this._setCleanedDateHeader()
+
+    log('>> Region: ' + this.region);
+    log('>> Service: ' + this.service);
+    log('>> Access Key Id: ' + this.accessKeyId);
+    log('>> Secret Access Key: ' + this.secretAccessKey);
+    log('>> Headers: ' + JSON.stringify(this.headers));
+    log('>> Url: ' + this.url);
+
 };
 
 /**
@@ -44,7 +52,7 @@ Sign.prototype._getCanonicalHeaders = function () {
     var self = this;
     return Object.keys(this.headers).map(function (key) {
             var cleaned_key = key.toLowerCase()
-            var cleaned_val = self.headers[key].replace(/^\s+|\s+$/g, '')
+            var cleaned_val = self.headers[key]//.replace(/^\s+|\s+$/g, '')
             if(cleaned_key == 'host' && cleaned_val.includes(':')){
                 var port = cleaned_val.split(':')[1];
                 if(port == "80" || port == "443"){
@@ -69,7 +77,7 @@ Sign.prototype._getCanonicalHeaderKeys = function () {
  * @return {string}
  */
 Sign.prototype._getCanonicalRequest = function () {
-    return [
+    var canonicalRequest = [
         this.method,
         this._getPath(),
         this._getQuery(),
@@ -77,6 +85,8 @@ Sign.prototype._getCanonicalRequest = function () {
         this._getCanonicalHeaderKeys(),
         this._hexdigest(this.body || '')
     ].join('\n');
+    log('>> Canonical Request: ' + canonicalRequest);
+    return canonicalRequest
 };
 
 /**
@@ -219,5 +229,10 @@ Sign.prototype._hexdigest = function (key) {
 Sign.prototype._hexhmac = function (key, value) {
     return crypto.createHmac('sha256', key).update(value).digest('hex');
 };
+
+
+function log(msg) {
+    process.env.DEBUG && console.log( msg);
+}
 
 module.exports = Sign;

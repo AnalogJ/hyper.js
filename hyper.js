@@ -2,7 +2,9 @@ var Docker = require('dockerode'),
     Modem = require('docker-modem'),
     Signer = require('./signer'),
     util = require('util'),
-    url = require('url');
+    url = require('url'),
+    fs = require('fs'),
+    path = require('path')
 
 var _config = null;
 
@@ -17,13 +19,13 @@ Modem.prototype.buildRequest = function(options, context, data, callback) {
         slashes: true,
         hostname: options.hostname,
         port: options.port,
-        pathname: options.path
-    });
-
+        // pathname: options.path // this will incorrectly encode the '?' character.
+    }) + options.path
     // options.headers["Content-Type"] = "application/json";
+
     var sign = new Signer({
         accessKeyId: _config.access_key,
-        body: options.file || '',
+        body: data || '',
         headers: options.headers,
         method: options.method,
         region: 'us-west-1',
