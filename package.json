@@ -5,7 +5,9 @@
   "main": "hyper.js",
   "dependencies": {
     "docker-modem": "^0.3.1",
-    "dockerode": "^2.2.10"
+    "dockerode": "^2.2.10",
+    "hyper-aws4": "^1.1.1",
+    "proxy-support": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
