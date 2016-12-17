@@ -14,3 +14,9 @@
 			// docker.getContainer(containerInfo.Id).stop(cb);
 		});
 	});
+	
+	
+# Resources
+
+- https://github.com/hyperhq/hypercli
+- https://github.com/hyperhq/hypercli/blob/master/vendor/src/github.com/docker/engine-api/client/sign4.go
