@@ -1,6 +1,6 @@
 {
   "name": "hyper.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "dependencies": {
     "docker-modem": {
       "version": "0.3.2",
